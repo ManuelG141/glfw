@@ -25,7 +25,6 @@ project "GLFW"
 	}
 
 	filter "system:windows"
-		buildoptions { "-std=c11", "-lgdi32" }
 		systemversion "latest"
 
 		files
@@ -48,9 +47,9 @@ project "GLFW"
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 
-	filter { "system:windows", "configurations:Release or configurations:Dist" }
+	filter {"configurations:Release* or configurations:Dist*" }
 		runtime "Release"
 		optimize "On"
-	filter { "system:windows", "configurations:Debug" }
+	filter {"configurations:Debug*" }
 		runtime "Debug"
 		symbols "On"
