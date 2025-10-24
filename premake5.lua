@@ -1,7 +1,6 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
-	staticruntime "On"
 
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -46,6 +45,11 @@ project "GLFW"
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
+
+	filter "not *DLL"
+		staticruntime "On"
+	filter "*DLL"
+		staticruntime "Off" -- Don't include Static runtime for DLL builds
 
 	filter {"configurations:Release* or configurations:Dist*" }
 		runtime "Release"
